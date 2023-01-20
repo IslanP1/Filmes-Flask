@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 Base = declarative_base()
 
-class Usuario(UserMixin, Base):
+class Usuario(Base):
     __tablename__ = 'usuarios'
     id = Column(Integer, primary_key=True)
     username = Column(String)
