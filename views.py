@@ -45,7 +45,7 @@ def index():
 def login():
     
     if current_user.is_authenticated:
-        login_user()
+        logout_user()
         
     if request.method == 'POST':
         sessaoLogin = sessaoDb()
