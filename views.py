@@ -3,6 +3,8 @@ from sqlalchemy.orm import sessionmaker
 from models import Base, Usuario
 from main import app, engine
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+import requests
+import json
 
 Base.metadata.bind = engine
 sessaoDb = sessionmaker(bind=engine)
@@ -36,9 +38,21 @@ def load_user(user_id):
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('base.html', user_name=current_user.name)
+        filmes = filmesPopulares()
+        return render_template('base.html', user_name=current_user.name, filmes=filmes)
     else:
         return 'Cadastra-se ou faça login'
+
+def filmesPopulares():
+    chave_api = ""
+    url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={chave_api}&language=pt-br"
+    response = requests.get(url)
+    return response.json()
+
+
+
+   
+    
 
 
 @app.route('/login', methods=['POST', 'GET'])

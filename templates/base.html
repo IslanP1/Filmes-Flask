@@ -38,6 +38,21 @@
             Seja bem-vindo {{ user_name }}
         </div>
 
+        <table>
+            <tr>
+                <th>Título</th>
+                <th>Avaliação</th>
+            </tr>
+            {% for filme in filmes["results"] %}
+            <tr>
+                <td>{{ filme.title }}</td>
+                <td>{{ filme.vote_average }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+
         <div class="hero-body">
             <div class="container has-text-centered">
                {% block content %}
