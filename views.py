@@ -1,12 +1,9 @@
 from flask import render_template, request, redirect, url_for, session
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, Usuario
-from main import app
+from main import app, engine
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 
-
-engine = create_engine('sqlite:///db.sqlite')
 Base.metadata.bind = engine
 sessaoDb = sessionmaker(bind=engine)
 
